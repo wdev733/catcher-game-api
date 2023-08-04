@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+# npm test # it's disabled, because the pipeline will fail anyways. 
+# this is just so that you could commit something without adding a test. 
+# but still ensures that tests pass on merge to main.

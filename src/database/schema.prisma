@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider      = "prisma-client-js"
+  // The default query engine is a Node-API library that is loaded into Prisma Client, 
+  // but there is also an alternative implementation as an executable binary that runs in its own process
+  // Using binary because node versions at times affect the default engine (for e.g running on node:18-alpine in a container)
+  // Valid values for engineType are binary and library
+  engineType    = "binary"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Define Prisma models here
+// model convention is singular (non-plural) and PascalCase
+// column convention is singular and camelCase
+
+model User {
+  id       String @id @default(uuid()) @db.Uuid()
+  userName String @unique @map("user_name")
+  score    Int    @map("score")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("user")
+}

@@ -1,0 +1,31 @@
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint/eslint-plugin', 'simple-import-sort', 'no-relative-import-paths', 'prettier'],
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier', 'plugin:security/recommended'],
+  root: true,
+  env: {
+    node: true,
+    jest: true,
+  },
+  ignorePatterns: ['.eslintrc.js', 'dist', 'node_modules', '**/phox/*.json'],
+  rules: {
+    complexity: ['error', 8],
+    'prettier/prettier': 'error',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unnecessary-condition': 'error',
+    'no-constant-condition': ['error', { checkLoops: false }],
+    'no-relative-import-paths/no-relative-import-paths': ['warn', { allowSameFolder: false }],
+    'object-shorthand': ['error', 'always'],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    eqeqeq: 'error',
+  },
+};
